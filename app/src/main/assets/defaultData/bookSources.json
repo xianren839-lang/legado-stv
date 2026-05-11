@@ -1,0 +1,74 @@
+[
+{
+  "bookSourceUrl": "https://sangtacviet.me",
+  "bookSourceName": "Sáng Tác Việt (STV)",
+  "bookSourceGroup": "越南语; 小说",
+  "bookSourceType": 0,
+  "bookSourceComment": "SangTacViet 越南网络小说平台。需要登录账号才能获取正文内容。",
+  "bookUrlPattern": "",
+  "loginUrl": "",
+  "loginHeaderMap": {
+    "User-Agent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.82 Mobile Safari/537.36",
+    "Accept": "*/*",
+    "x-stv-transport": "app",
+    "x-requested-with": "com.sangtacviet.mobilereader",
+    "Referer": "https://sangtacviet.me/",
+    "Origin": "https://sangtacviet.me"
+  },
+  "header": "{\"User-Agent\":\"Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.82 Mobile Safari/537.36\",\"Accept\":\"*/*\",\"Accept-Language\":\"vi-VN,vi;q=0.9,en-US;q=0.8,en;q=0.7\",\"x-stv-transport\":\"app\",\"x-requested-with\":\"com.sangtacviet.mobilereader\",\"Referer\":\"https://sangtacviet.me/\",\"Origin\":\"https://sangtacviet.me\",\"Cookie\":\"transmode=chinese; foreignlang=vi; lang=zh; mac_tt=true\"}",
+  "searchUrl": "/io/searchtp/searchBooks?method=search&findinname={{key}}&find=&minc=0&step=20&p={{page-1}}&sort=&tag=",
+  "exploreUrl": "[\n  {\"title\":\"最近更新\",\"url\":\"/io/searchtp/searchBooks?method=search&find=&minc=50&sort=update&step=20&p={{page-1}}&tag=\",\"style\":{\"layout_flexGrow\":1}},\n  {\"title\":\"推荐书籍\",\"url\":\"/mobile/booklist.php?method=bookpush&p={{page-1}}\",\"style\":{\"layout_flexGrow\":1}},\n  {\"title\":\"总点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=view&p={{page-1}}\"},\n  {\"title\":\"日点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=viewday&p={{page-1}}\"},\n  {\"title\":\"周点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=viewweek&p={{page-1}}\"},\n  {\"title\":\"月点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=viewmonth&p={{page-1}}\"},\n  {\"title\":\"总推荐榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=recommend&p={{page-1}}\"},\n  {\"title\":\"周推荐榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=recweek&p={{page-1}}\"},\n  {\"title\":\"月推荐榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=recmonth&p={{page-1}}\"},\n  {\"title\":\"收藏榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=bookmark&p={{page-1}}\"}\n]",
+  "enabled": true,
+  "enabledExplore": true,
+  "customOrder": -1073741824,
+  "weight": 0,
+  "lastUpdateTime": 0,
+  "ruleSearch": {
+    "bookList": "@json:$.list[*]",
+    "name": "@json:$.name",
+    "author": "@json:$.author",
+    "kind": "@json:$.host",
+    "wordCount": "",
+    "lastChapter": "",
+    "intro": "@json:$.info",
+    "coverUrl": "@json:$.thumb",
+    "bookUrl": "<js>\n'/mobile/bookinfo.php?hid=' + (result['id']||'') + '&host=' + (result['host']||'')\n</js>"
+  },
+  "ruleExplore": {
+    "bookList": "@json:$.list[*]",
+    "name": "@json:$.name",
+    "author": "@json:$.author",
+    "kind": "@json:$.host",
+    "wordCount": "",
+    "lastChapter": "",
+    "intro": "@json:$.info",
+    "coverUrl": "@json:$.thumb",
+    "bookUrl": "<js>\n'/mobile/bookinfo.php?hid=' + (result['id']||'') + '&host=' + (result['host']||'')\n</js>"
+  },
+  "ruleBookInfo": {
+    "name": "<js>\n(function(){\n  try {\n    var data = result;\n    if (typeof data === 'string') data = JSON.parse(data);\n    if (data.book) data = data.book;\n    return data.name || data.title || '';\n  } catch(e) { return ''; }\n})()\n</js>",
+    "author": "<js>\n(function(){\n  try {\n    var data = result;\n    if (typeof data === 'string') data = JSON.parse(data);\n    if (data.book) data = data.book;\n    return data.author || data.hauthor || '';\n  } catch(e) { return ''; }\n})()\n</js>",
+    "kind": "<js>\n(function(){\n  try {\n    var data = result;\n    if (typeof data === 'string') data = JSON.parse(data);\n    if (data.book) data = data.book;\n    return data.host || '';\n  } catch(e) { return ''; }\n})()\n</js>",
+    "wordCount": "<js>\n(function(){\n  try {\n    var data = result;\n    if (typeof data === 'string') data = JSON.parse(data);\n    if (data.book) data = data.book;\n    return data.chaptercount ? data.chaptercount + '章' : '';\n  } catch(e) { return ''; }\n})()\n</js>",
+    "lastChapter": "",
+    "intro": "<js>\n(function(){\n  try {\n    var data = result;\n    if (typeof data === 'string') data = JSON.parse(data);\n    if (data.book) data = data.book;\n    var info = data.info || data.desc || '';\n    info = info.replace(/\\[banquyen=[^\\]]+\\]/g, '');\n    return info;\n  } catch(e) { return ''; }\n})()\n</js>",
+    "coverUrl": "<js>\n(function(){\n  try {\n    var data = result;\n    if (typeof data === 'string') data = JSON.parse(data);\n    if (data.book) data = data.book;\n    return data.thumb || data.coverurl || '';\n  } catch(e) { return ''; }\n})()\n</js>",
+    "tocUrl": "<js>\n(function(){\n  try {\n    var bookUrl = book.bookUrl || '';\n    var hostMatch = bookUrl.match(/[?&]host=([^&]+)/);\n    var hidMatch = bookUrl.match(/[?&]hid=([^&]+)/);\n    var host = hostMatch ? hostMatch[1] : '';\n    var hid = hidMatch ? hidMatch[1] : '';\n    java.put('stv_host', host);\n    java.put('stv_bookid', hid);\n    return '/index.php?ngmar=chapterlist&h=' + host + '&bookid=' + hid + '&sajax=getchapterlist';\n  } catch(e) { return ''; }\n})()\n</js>",
+    "canReName": "",
+    "bookInfoInit": ""
+  },
+  "ruleToc": {
+    "chapterList": "<js>\n(function(){\n  try {\n    var data = result;\n    if (typeof data === 'string') data = JSON.parse(data);\n    if (!data || data.code != 1 || !data.data) return [];\n\n    var bookUrl = book.bookUrl || '';\n    var hm = bookUrl.match(/[?&]host=([^&]+)/);\n    var bm = bookUrl.match(/[?&]hid=([^&]+)/);\n    var host = hm ? hm[1] : '';\n    var bookid = bm ? bm[1] : '';\n    java.put('stv_host', host);\n    java.put('stv_bookid', bookid);\n\n    var rawStr = (data.data || '').trim();\n    if (!rawStr) return [];\n    var chapters = rawStr.split('-//-');\n\n    var titleSource = null;\n    if (data.oridata && data.oridata.trim().length > 0) {\n      titleSource = data.oridata.trim().split('-//-');\n    } else if (data.enckey) {\n      try {\n        titleSource = java.base64Decode(data.enckey).split('-//-');\n      } catch(e) {}\n    }\n\n    var list = [];\n    for (var i = 0; i < chapters.length; i++) {\n      var parts = chapters[i].split('-/-');\n      if (parts.length < 3) continue;\n\n      var cid = parts[1];\n      var title = parts[2];\n\n      if (titleSource && i < titleSource.length) {\n        var tsParts = titleSource[i].split('-/-');\n        if (tsParts.length >= 3 && tsParts[2].length > 0) {\n          title = tsParts[2];\n        }\n      }\n\n      var url = '/index.php?sajax=readchapter&h=' + host + '&bookid=' + bookid + '&c=' + cid;\n      list.push({\n        chapterUrl: url,\n        chapterName: title\n      });\n    }\n\n    return list;\n  } catch(e) { return []; }\n})()\n</js>",
+    "chapterName": "chapterName",
+    "chapterUrl": "chapterUrl",
+    "isVip": "",
+    "nextTocUrl": "",
+    "updateTime": ""
+  },
+  "ruleContent": {
+    "content": "@js:args={}\nbaseUrl.match(/[^?=&]+=[^&]*/g).map(v=>{v=v.match(/(.+?)=(.*)/);if(v)args[v[1]]=v[2]})\nhost=args.h||''\nbookid=args.bookid||''\ncid=args.c||''\n\n// 通过WebView获取章节密钥(复刻STV Flutter版流程)\nkey=java.getChapterKey(host,bookid)\n\n// 获取登录Cookie\ncCookie=''\nc=source.getLoginHeaderMap()\nif(c){cc=c.get('Cookie');if(cc)cCookie=cc}\n\n// POST读取章节\nreadUrl=source.key+'/index.php?sajax=readchapter&h='+host+'&bookid='+bookid+'&c='+cid+'&key='+encodeURIComponent(key)\nresp=java.post(readUrl,'',{'Cookie':cCookie,'referer':source.key+'/truyen/'+host+'/1/'+bookid+'/'+cid+'/','Content-type':'application/x-www-form-urlencoded'})\nhtml=String(resp.body())\ndata=JSON.parse(html)\ncode=data.code\nif(code=='0'||code=='1'){\n  result=data.oridata||data.data||''\n  result=result.replace(/\\[banquyen=[^\\]]+\\]/g,'')\n}else if(code=='7'){\n  result='需要验证码'\n}else if(code=='10002'){\n  result='需要更新应用: '+(data.err||'')\n}else{\n  result='章节获取失败: '+(data.err||data.message||('code='+code))\n}",
+    "nextContentUrl": "",
+    "webJs": "",
+    "sourceRegex": ""
+  }
+}
