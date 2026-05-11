@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Clear 18PlusList.txt
+        run: echo "" > app/src/main/assets/18PlusList.txt
+
+      - name: Set up signing
+        run: |
+          cp .github/workflows/legado.jks app/legado.jks
+          echo "" >> gradle.properties
+          echo "RELEASE_STORE_FILE=./legado.jks" >> gradle.properties
+          echo "RELEASE_KEY_ALIAS=legado" >> gradle.properties
+          echo "RELEASE_STORE_PASSWORD=gedoor_legado" >> gradle.properties
+          echo "RELEASE_KEY_PASSWORD=gedoor_legado" >> gradle.properties
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build arm64 release APK
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleApprelease --build-cache --parallel --daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: legado-stv-arm64
+          path: app/build/outputs/apk/**/*.apk
