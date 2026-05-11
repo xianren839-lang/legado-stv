@@ -20,7 +20,7 @@
   "exploreUrl": "[\n  {\"title\":\"最近更新\",\"url\":\"/io/searchtp/searchBooks?method=search&find=&minc=50&sort=update&step=20&p={{page-1}}&tag=\",\"style\":{\"layout_flexGrow\":1}},\n  {\"title\":\"推荐书籍\",\"url\":\"/mobile/booklist.php?method=bookpush&p={{page-1}}\",\"style\":{\"layout_flexGrow\":1}},\n  {\"title\":\"总点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=view&p={{page-1}}\"},\n  {\"title\":\"日点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=viewday&p={{page-1}}\"},\n  {\"title\":\"周点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=viewweek&p={{page-1}}\"},\n  {\"title\":\"月点击榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=viewmonth&p={{page-1}}\"},\n  {\"title\":\"总推荐榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=recommend&p={{page-1}}\"},\n  {\"title\":\"周推荐榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=recweek&p={{page-1}}\"},\n  {\"title\":\"月推荐榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=recmonth&p={{page-1}}\"},\n  {\"title\":\"收藏榜\",\"url\":\"/mobile/booklist.php?method=ranking&ranktype=bookmark&p={{page-1}}\"}\n]",
   "enabled": true,
   "enabledExplore": true,
-  "customOrder": -1073741824,
+  "customOrder": 0,
   "weight": 0,
   "lastUpdateTime": 0,
   "ruleSearch": {
