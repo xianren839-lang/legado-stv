@@ -94,7 +94,10 @@ data class BookSource(
     // 正文页规则
     var ruleContent: ContentRule? = null,
     // 段评规则
-    var ruleReview: ReviewRule? = null
+    var ruleReview: ReviewRule? = null,
+    // 是否为内置书源（不可删除）
+    @ColumnInfo(defaultValue = "0")
+    var isBuiltIn: Boolean = false
 ) : Parcelable, BaseSource {
 
     override fun getTag(): String {
