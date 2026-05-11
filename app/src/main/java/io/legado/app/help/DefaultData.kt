@@ -37,13 +37,23 @@ object DefaultData {
                 if (LocalConfig.needUpDictRule) {
                     importDefaultDictRules()
                 }
-                if (LocalConfig.needUpBookSources) {
-                    importDefaultBookSources()
-                }
+                importDefaultBookSources()
             }.onError {
                 it.printOnDebug()
             }
         }
+        // 无条件确保内置源存在（即使版本未变）
+        Coroutine.async {
+            val sources = stvBookSources
+            if (sources.isNotEmpty()) {
+                val builtInKeys = appDb.bookSourceDao.builtInKeys().toSet()
+                val toInsert = sources.filter { it.bookSourceUrl !in builtInKeys }
+                    .map { it.apply { isBuiltIn = true } }
+                if (toInsert.isNotEmpty()) {
+                    appDb.bookSourceDao.insert(*toInsert.toTypedArray())
+                }
+            }
+        }.onError { it.printOnDebug() }
     }
 
     val httpTTS: List<HttpTTS> by lazy {
@@ -106,6 +116,14 @@ object DefaultData {
         GSON.fromJsonArray<DictRule>(json).getOrThrow()
     }
 
+    val stvBookSources: List<BookSource> by lazy {
+        val json = String(
+            appCtx.assets.open("defaultData${File.separator}bookSources.json")
+                .readBytes()
+        )
+        GSON.fromJsonArray<BookSource>(json).getOrElse { emptyList() }
+    }
+
     val keyboardAssists: List<KeyboardAssist> by lazy {
         val json = String(
             appCtx.assets.open("defaultData${File.separator}keyboardAssists.json")
@@ -133,19 +151,9 @@ object DefaultData {
         appDb.dictRuleDao.insert(*dictRules.toTypedArray())
     }
 
-    val bookSources: List<BookSource> by lazy {
-        val json = String(
-            appCtx.assets.open("defaultData${File.separator}bookSources.json")
-                .readBytes()
-        )
-        GSON.fromJsonArray<BookSource>(json).getOrDefault(emptyList())
-    }
-
     fun importDefaultBookSources() {
-        appDb.bookSourceDao.deleteByUrls(
-            bookSources.map { it.bookSourceUrl }
-        )
-        appDb.bookSourceDao.insert(*bookSources.toTypedArray())
+        val sources = stvBookSources.map { it.apply { isBuiltIn = true } }
+        appDb.bookSourceDao.insert(*sources.toTypedArray())
     }
 
 }
