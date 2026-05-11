@@ -67,7 +67,7 @@
       "updateTime": ""
     },
     "ruleContent": {
-      "content": "@js:\nvar m=baseUrl.match(/[?&]h=([^&]+)/);\nvar h=m?m[1]:\"\";\nm=baseUrl.match(/[?&]bookid=([^&]+)/);\nvar bid=m?m[1]:\"\";\nm=baseUrl.match(/[?&]c=([^&]+)/);\nvar cid=m?m[1]:\"\";\n\nvar key=java.getChapterKey(h,bid);\n\nvar url=source.key+\"/index.php?sajax=readchapter&h=\"+h+\"&bookid=\"+bid+\"&c=\"+cid+\"&key=\"+encodeURIComponent(key);\n\nvar resp=java.get(url,{});\nvar html=String(resp.body());\nvar data=JSON.parse(html);\nvar code=data.code;\nif(code==\"0\"||code==\"1\"){\n  result=data.oridata||data.data||\"\";\n  result=result.replace(/[banquyen=[^]]+]/g,\"\");\n}else if(code==\"7\"){\n  result=\"需要验证码\";\n}else if(code==\"10002\"){\n  result=\"需要更新应用: \"+(data.err||\"\");\n}else{\n  result=\"章节获取失败: \"+(data.err||data.message||(\"code=\"+code));\n}"
+      "content": "@js:\nvar m=baseUrl.match(/[?&]h=([^&]+)/);\nvar h=m?m[1]:\"\";\nm=baseUrl.match(/[?&]bookid=([^&]+)/);\nvar bid=m?m[1]:\"\";\nm=baseUrl.match(/[?&]c=([^&]+)/);\nvar cid=m?m[1]:\"\";\n\nvar key=java.getChapterKey(h,bid);\n\nvar url=source.key+\"/index.php?sajax=readchapter&h=\"+h+\"&bookid=\"+bid+\"&c=\"+cid+\"&key=\"+encodeURIComponent(key);\n\nvar headers=source.getHeaderMap(true);\nvar resp=java.get(url,headers);\nvar html=String(resp.body());\nvar data=JSON.parse(html);\nvar code=data.code;\nif(code==\"0\"||code==\"1\"){\n  result=data.oridata||data.data||\"\";\n  result=result.replace(/[banquyen=[^]]+]/g,\"\");\n}else if(code==\"7\"){\n  result=\"需要验证码\";\n}else if(code==\"10002\"){\n  result=\"需要更新应用: \"+(data.err||\"\");\n}else{\n  result=\"章节获取失败: \"+(data.err||data.message||(\"code=\"+code));\n}"
     }
   }
 ]
