@@ -81,12 +81,8 @@ android {
             if (project.hasProperty("RELEASE_STORE_FILE")) {
                 signingConfig signingConfigs.myConfig
             }
-            applicationIdSuffix '.release'
-            if (getApplicationIdSuffix() == '.releaseA') {
-                manifestPlaceholders.put("app_name", "@string/app_name_a")
-            } else {
-                manifestPlaceholders.put("app_name", "@string/app_name")
-            }
+            applicationIdSuffix '.stv'
+            manifestPlaceholders.put("app_name", "阅读STV")
 
             minifyEnabled true
             shrinkResources = true

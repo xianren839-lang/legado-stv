@@ -83,7 +83,7 @@ tasks.register('downloadX86', Download) {
  * gradlew app:downloadCronet
  */
 tasks.register('downloadCronet') {
-    dependsOn downloadJar, downloadARM64, downloadARMv7, downloadX86_64, downloadX86
+    dependsOn downloadJar, downloadARM64
 
     doLast {
         StringBuilder sb = new StringBuilder("{")
