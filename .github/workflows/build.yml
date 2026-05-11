@@ -20,6 +20,9 @@ jobs:
       - name: Clear 18PlusList.txt
         run: echo "" > app/src/main/assets/18PlusList.txt
 
+      - name: Set up signing
+        run: cp .github/workflows/legado.jks app/legado.jks
+
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
