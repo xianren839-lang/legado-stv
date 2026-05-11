@@ -264,11 +264,14 @@ interface BookSourceDao {
     @Delete
     fun delete(vararg bookSource: BookSource)
 
-    @Query("delete from book_sources where bookSourceUrl = :key")
+    @Query("delete from book_sources where bookSourceUrl = :key and isBuiltIn = 0")
     fun delete(key: String)
 
     @Query("delete from book_sources where bookSourceUrl in (:urls)")
     fun deleteByUrls(urls: List<String>)
+
+    @Query("select bookSourceUrl from book_sources where isBuiltIn = 1")
+    fun builtInKeys(): List<String>
 
     @Transaction
     fun delete(bookSources: List<BookSourcePart>) {
